@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import albumData from './../data/albums';
 import PlayerBar from './PlayerBar';
+import '../styles/album.css';
+
 
 class Album extends Component {
   constructor(props) {
@@ -10,7 +12,7 @@ class Album extends Component {
     });
     this.state = {
       album: album,
-      currentSong: album.songs[0],
+      currentSong: undefined,
       currentTime: 0,
       currentVolume: 0.8,
       duration: album.songs[0].duration,
@@ -110,11 +112,19 @@ class Album extends Component {
             {
               this.state.album.songs.map( (song, index) =>
                 <tr className='song' key={index} onClick={() => this.handleSongClick(song)} >
-                  <button>
-                    <span className='song-number'>{index+1}</span>
-                    <span className='ion-play'></span>
-                    <span className='ion-pause'></span>
-                  </button>
+                  <td>
+                    <button>
+                      <span className='song-number'>{ song !== this.state.currentSong && !this.state.isPlaying ? index+1: '' }</span>
+                      <span className='song-number'>{ song !== this.state.currentSong && this.state.isPlaying ? index+1: '' }</span>
+                      <div className={ !this.state.isPlaying ? 'b-play': 'c-play' }>
+                        <span className={ song === this.state.currentSong && this.state.isPlaying ? 'ion-pause': 'ion-play' }></span>
+                      </div>
+                      <span className={ song !== this.state.currentSong && !this.state.isPlaying ? 'ion-play': '' }></span>
+                      <div className='a-play'>
+                        <span className={ song === this.state.currentSong && !this.state.isPlaying ? 'ion-play': '' }></span>
+                      </div>
+                    </button>
+                  </td>
                   <td className='song-title'>{ song.title }</td>
                   <td className='song-duration'>{ this.formatTime(song.duration) }</td>
                 </tr>

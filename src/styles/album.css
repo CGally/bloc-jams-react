@@ -1,0 +1,22 @@
+button {
+  height: 50px;
+  width: 100px;
+}
+tr:hover .song-number {
+  display: none;
+}
+tr .ion-play {
+  display: none;
+}
+tr:hover .ion-play {
+  display: inline;
+}
+tr:hover .b-play .ion-play {
+  display: none;
+}
+tr:focus .ion-play {
+  display: block;
+}
+.a-play .ion-play {
+  display: block;
+}
